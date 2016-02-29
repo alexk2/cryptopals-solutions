@@ -14,6 +14,21 @@ def hex_string_to_bytearray(hex_string):
 
 	return this_bytearray
 
+def bytearray_to_hex_string(this_bytearray):
+
+	hex_index = "0123456789abcdef"
+
+	hex_int_list = []
+	h = 2 * [0]
+	for i in range(0, len(this_bytearray)):
+		b = this_bytearray[i]
+		h[0] = b >> 4
+		h[1] = b & 15
+		hex_int_list.extend(h)
+
+	hex_string = ''.join([hex_index[x] for x in hex_int_list])
+	return hex_string
+
 def bytearray_to_b64_string(this_bytearray):
 
 	b64_index = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
@@ -44,3 +59,13 @@ def hex_char_to_int(hex_char):
 	if 'A' <= hex_char and hex_char <= 'F':
 		return 10 + ord(hex_char) - ord('A')
 	raise Exception("Invalid input")
+
+def bytearray_xor(ba1, ba2):
+	if len(ba1) != len(ba2):
+		raise Exception("Input bytearrays not equal length")
+
+	result = bytearray()
+	for (b1,b2) in zip(ba1,ba2):
+		result.append(b1 ^ b2)
+
+	return result
