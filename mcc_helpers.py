@@ -69,3 +69,20 @@ def bytearray_xor(ba1, ba2):
 		result.append(b1 ^ b2)
 
 	return result
+
+def decrypt_sb_xor(ba):
+	frequent_chars = "ETAOIN SHRDLU"
+	frequent_chars += frequent_chars.lower()
+
+	scores = 256 * [0]
+	for i in range(0,256):
+		cipher = bytearray(len(ba) * [i])
+		ba_dec = bytearray_xor(ba, cipher)
+		scores[i] = [chr(x) in frequent_chars for x in ba_dec].count(True)
+
+	best_score = max(scores)
+	best_byte = scores.index(best_score)
+
+	cipher = bytearray(len(ba) * [best_byte])
+	ba_dec = bytearray_xor(ba, cipher)
+	return ba_dec
