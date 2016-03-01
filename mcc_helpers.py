@@ -85,4 +85,4 @@ def decrypt_sb_xor(ba):
 
 	cipher = bytearray(len(ba) * [best_byte])
 	ba_dec = bytearray_xor(ba, cipher)
-	return ba_dec
+	return (ba_dec, best_score)
