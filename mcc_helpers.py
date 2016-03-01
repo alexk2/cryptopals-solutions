@@ -112,7 +112,7 @@ def decrypt_sb_xor(ba):
 
 	cipher = bytearray(len(ba) * [best_byte])
 	ba_dec = bytearray_xor(ba, cipher)
-	return (ba_dec, best_score)
+	return (ba_dec, best_byte, best_score)
 
 def encrypt_rk_xor(plaintext_ba, key_ba):
 	key_len = len(key_ba)

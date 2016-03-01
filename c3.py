@@ -3,7 +3,7 @@ from mcc_helpers import decrypt_sb_xor
 
 def c3(hex_string):
 	ba = hex_string_to_bytearray(hex_string)
-	(ba_dec,_) = decrypt_sb_xor(ba)
+	(ba_dec,_,_) = decrypt_sb_xor(ba)
 	return ba_dec.decode("utf-8")
 
 if __name__ == "__main__":
