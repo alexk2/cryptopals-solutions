@@ -35,7 +35,7 @@ def bytearray_to_b64_string(this_bytearray):
 
 	#Pad bytearray to multiple of 3 bytes = 24 bits (= lcm(8,6))
 	padding_length = -len(this_bytearray) % 3
-	this_bytearray = padding_length * '\0' + this_bytearray
+	this_bytearray += padding_length * '\0'
 
 	b64_int_list = []
 	b64 = 4 * [0]
@@ -49,6 +49,8 @@ def bytearray_to_b64_string(this_bytearray):
 		b64_int_list.extend(b64)
 
 	b64_string = ''.join([b64_index[x] for x in b64_int_list])
+	b64_string = b64_string[0:len(b64_string) - padding_length]
+	b64_string += padding_length * '='
 	return b64_string
 
 def hex_char_to_int(hex_char):
