@@ -29,6 +29,30 @@ def bytearray_to_hex_string(this_bytearray):
 	hex_string = ''.join([hex_index[x] for x in hex_int_list])
 	return hex_string
 
+def b64_string_to_bytearray(b64_string):
+
+	b64_index = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+
+	b64_string = b64_string.rstrip('=')
+	#Pad b64 string to multiple of 4 b64 digits = 24 bits (= lcm(8,6))
+	padding_length = -len(b64_string) % 4
+	b64_string += padding_length * b64_index[0]
+
+	b64_int_list = [b64_index.index(x) for x in b64_string]
+	this_bytearray = bytearray()
+	b = bytearray(3)
+	#Convert b64 digits to bytes in 4 b64 digit chunks
+	for i in range(0, len(b64_int_list)/4):
+		b64 = b64_int_list[4*i:4*(i+1)]
+		b[0] = (b64[0] << 2) | (b64[1] >> 4)
+		b[1] = ((b64[1] << 4) | (b64[2] >> 2)) & 255
+		b[2] = ((b64[2] << 6) | b64[3]) & 255
+		this_bytearray.extend(b)
+
+	#Trim extra chars produced by padding
+	this_bytearray = this_bytearray[0:len(this_bytearray) - padding_length]
+	return this_bytearray
+
 def bytearray_to_b64_string(this_bytearray):
 
 	b64_index = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
@@ -49,6 +73,7 @@ def bytearray_to_b64_string(this_bytearray):
 		b64_int_list.extend(b64)
 
 	b64_string = ''.join([b64_index[x] for x in b64_int_list])
+	#Replace extra chars produced by padding with '=' padding chars
 	b64_string = b64_string[0:len(b64_string) - padding_length]
 	b64_string += padding_length * '='
 	return b64_string
