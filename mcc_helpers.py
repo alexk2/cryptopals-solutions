@@ -117,7 +117,7 @@ def decrypt_sb_xor(ba):
 def encrypt_rk_xor(plaintext_ba, key_ba):
 	key_len = len(key_ba)
 	ba_enc = [x ^ key_ba[i % key_len] for (i,x) in enumerate(plaintext_ba)]
-	return ba_enc
+	return bytearray(ba_enc)
 
 def hamming_distance(s1, s2):
 	ba1 = bytearray(s1)
