@@ -118,3 +118,16 @@ def encrypt_rk_xor(plaintext_ba, key_ba):
 	key_len = len(key_ba)
 	ba_enc = [x ^ key_ba[i % key_len] for (i,x) in enumerate(plaintext_ba)]
 	return ba_enc
+
+def hamming_distance(s1, s2):
+	ba1 = bytearray(s1)
+	ba2 = bytearray(s2)
+	distance = sum([bit_count(b1 ^ b2) for (b1,b2) in zip(ba1,ba2)])
+	return distance
+
+def bit_count(i):
+	distance = 0
+	while i != 0:
+		distance += (i & 1)
+		i = i >> 1
+	return distance
