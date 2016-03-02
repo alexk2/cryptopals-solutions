@@ -131,3 +131,8 @@ def bit_count(i):
 		distance += (i & 1)
 		i = i >> 1
 	return distance
+
+def pkcs7_pad(s, block_length):
+	padding_length = block_length - len(s) % block_length
+	s_padded = s + padding_length * chr(padding_length)
+	return s_padded
