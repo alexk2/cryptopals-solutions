@@ -1,3 +1,5 @@
+from Crypto.Cipher import AES
+
 def hex_string_to_bytearray(hex_string):
 	
 	#Pad hex string to multiple of 2 chars = 8 bits
@@ -97,6 +99,16 @@ def bytearray_xor(ba1, ba2):
 
 	return result
 
+def string_xor(s1, s2):
+	if len(s1) != len(s2):
+		raise Exception("Input strings not equal length")
+
+	result = bytearray()
+	for (c1,c2) in zip(s1,s2):
+		result.append(ord(c1) ^ ord(c2))
+
+	return str(result)
+
 def decrypt_sb_xor(ba):
 	frequent_chars = "ETAOIN SHRDLU"
 	frequent_chars += frequent_chars.lower()
@@ -136,3 +148,39 @@ def pkcs7_pad(s, block_length):
 	padding_length = block_length - len(s) % block_length
 	s_padded = s + padding_length * chr(padding_length)
 	return s_padded
+
+def encrypt_aes_ecb(plaintext, key):
+	cipher = AES.new(key, AES.MODE_ECB)
+	ciphertext = cipher.encrypt(plaintext)
+	return ciphertext
+
+def decrypt_aes_ecb(ciphertext, key):
+	cipher = AES.new(key, AES.MODE_ECB)
+	plaintext = cipher.decrypt(ciphertext)
+	return plaintext
+
+def encrypt_aes_cbc(plaintext, key, iv):
+
+	ciphertext = bytearray()
+	prev_block_enc = iv
+	for i in range(0,len(plaintext),16):
+		block = plaintext[i:i+16]
+		block_chained = string_xor(block, prev_block_enc)
+		block_enc = encrypt_aes_ecb(block_chained, key)
+		ciphertext.extend(block_enc)
+		prev_block_enc = block_enc
+
+	return str(ciphertext)
+
+def decrypt_aes_cbc(ciphertext, key, iv):
+
+	plaintext = bytearray()
+	prev_block_enc = iv
+	for i in range(0,len(ciphertext),16):
+		block_enc = ciphertext[i:i+16]
+		block_chained = decrypt_aes_ecb(block_enc, key)
+		block = string_xor(block_chained, prev_block_enc)
+		plaintext.extend(block)
+		prev_block_enc = block_enc
+		
+	return str(plaintext)
