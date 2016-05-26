@@ -1,4 +1,5 @@
 from Crypto.Cipher import AES
+import random
 
 def hex_string_to_bytearray(hex_string):
 	
@@ -184,3 +185,45 @@ def decrypt_aes_cbc(ciphertext, key, iv):
 		prev_block_enc = block_enc
 		
 	return str(plaintext)
+
+def random_bytes(n):
+	return ''.join([chr(random.randint(0,255)) for x in range(0,n)])
+
+def generate_aes_key():
+	return random_bytes(16)
+
+def encryption_oracle(plaintext):
+	pre_bytes = random_bytes(random.randint(5,10))
+	post_bytes = random_bytes(random.randint(5,10))
+	plaintext = pre_bytes + plaintext + post_bytes
+	plaintext = pkcs7_pad(plaintext, 16)
+
+	key = generate_aes_key()
+
+	if random.randint(0,1) == 1:
+		mode = "ECB"
+		ciphertext = encrypt_aes_ecb(plaintext, key)
+	else:
+		mode = "CBC"
+		iv = random_bytes(16)
+		ciphertext = encrypt_aes_cbc(plaintext, key, iv)
+
+	return (mode, ciphertext)
+
+def detect_cipher_mode(black_box):
+	#Length chosen to ensure blocks 2 and 3 are from plaintext
+	pt_length = 43
+	plaintext = pt_length * '\0'
+
+	(mode, ciphertext) = black_box(plaintext)
+
+	#Blocks 2 and 3 contain the same plaintext, so their corresponding
+	#ciphertext will be the same under ECB, and different under CBC
+	block2 = ciphertext[16:32]
+	block3 = ciphertext[32:48]
+	if block2 == block3:
+		detected_mode = "ECB"
+	else:
+		detected_mode = "CBC"
+
+	return (mode, detected_mode)
