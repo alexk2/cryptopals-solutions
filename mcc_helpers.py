@@ -227,3 +227,15 @@ def detect_cipher_mode(black_box):
 		detected_mode = "CBC"
 
 	return (mode, detected_mode)
+
+class ECBUnknownSuffix:
+	def __init__(self, unknown_string):
+		self._key = generate_aes_key()
+		self._unknown_string = unknown_string
+
+	def encrypt(self, your_string):
+		plaintext = your_string + self._unknown_string
+		plaintext = pkcs7_pad(plaintext, 16)
+
+		ciphertext = encrypt_aes_ecb(plaintext, self._key)
+		return ciphertext
