@@ -150,6 +150,10 @@ def pkcs7_pad(s, block_length):
 	s_padded = s + padding_length * chr(padding_length)
 	return s_padded
 
+def pkcs7_strip(s):
+	pkcs7_len = ord(s[-1])
+	return s[:-pkcs7_len]
+
 def encrypt_aes_ecb(plaintext, key):
 	cipher = AES.new(key, AES.MODE_ECB)
 	ciphertext = cipher.encrypt(plaintext)
