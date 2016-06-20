@@ -150,11 +150,11 @@ def pkcs7_pad(s, block_length):
 	s_padded = s + padding_length * chr(padding_length)
 	return s_padded
 
-def pkcs7_strip(s):
+def pkcs7_strip_no_validate(s):
 	pkcs7_len = ord(s[-1])
 	return s[:-pkcs7_len]
 
-def pkcs7_validate_strip(s):
+def pkcs7_strip(s):
 	if len(s) == 0:
 		return s
 	pkcs7_len = ord(s[-1])

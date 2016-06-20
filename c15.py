@@ -1,8 +1,8 @@
-from mcc_helpers import pkcs7_validate_strip
+from mcc_helpers import pkcs7_strip
 
 def c15(s):
 
-	return pkcs7_validate_strip(s)
+	return pkcs7_strip(s)
 
 if __name__ == "__main__":
 
