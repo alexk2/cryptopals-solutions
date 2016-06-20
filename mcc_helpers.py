@@ -154,6 +154,16 @@ def pkcs7_strip(s):
 	pkcs7_len = ord(s[-1])
 	return s[:-pkcs7_len]
 
+def pkcs7_validate_strip(s):
+	if len(s) == 0:
+		return s
+	pkcs7_len = ord(s[-1])
+	pkcs7_padding = s[-pkcs7_len:]
+	if all([ord(x) == pkcs7_len for x in pkcs7_padding]):
+		return s[:-pkcs7_len]
+	else:
+		raise Exception('String ' + repr(s) + ' has invalid padding')
+
 def encrypt_aes_ecb(plaintext, key):
 	cipher = AES.new(key, AES.MODE_ECB)
 	ciphertext = cipher.encrypt(plaintext)
