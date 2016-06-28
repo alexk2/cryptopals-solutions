@@ -1,5 +1,5 @@
-from mcc_helpers import bytearray_to_hex_string
-from mcc_helpers import encrypt_rk_xor
+from cryptopals import bytearray_to_hex_string
+from cryptopals import encrypt_rk_xor
 
 def c5(plaintext, key):
 	plaintext_ba = bytearray(plaintext)

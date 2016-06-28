@@ -1,9 +1,9 @@
-from mcc_helpers import ECBUnknownSuffix
-from mcc_helpers import b64_string_to_bytearray
+from cryptopals import ECBUnknownSuffix
+from cryptopals import b64_string_to_bytearray
 
 def c12():
 
-	filename = './12.txt'
+	filename = '../data/12.txt'
 
 	this_file = open(filename)
 	b64_string = ''.join([x.rstrip('\n') for x in this_file.readlines()])

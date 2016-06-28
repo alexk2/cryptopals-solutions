@@ -1,9 +1,9 @@
-from mcc_helpers import b64_string_to_bytearray
-from mcc_helpers import decrypt_aes_cbc
+from cryptopals import b64_string_to_bytearray
+from cryptopals import decrypt_aes_cbc
 
 def c10():
 
-	filename = './10.txt'
+	filename = '../data/10.txt'
 	key = 'YELLOW SUBMARINE'
 	iv = 16 * '\0'
 

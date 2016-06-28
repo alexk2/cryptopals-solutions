@@ -1,4 +1,4 @@
-from mcc_helpers import pkcs7_strip
+from cryptopals import pkcs7_strip
 
 def c15(s):
 

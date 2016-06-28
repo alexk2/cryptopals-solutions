@@ -1,5 +1,5 @@
-from mcc_helpers import hex_string_to_bytearray
-from mcc_helpers import bytearray_to_b64_string
+from cryptopals import hex_string_to_bytearray
+from cryptopals import bytearray_to_b64_string
 
 def c1(hex_string):
 	this_bytearray = hex_string_to_bytearray(hex_string)

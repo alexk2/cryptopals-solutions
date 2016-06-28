@@ -1,4 +1,4 @@
-from mcc_helpers import pkcs7_pad
+from cryptopals import pkcs7_pad
 
 def c9(s, block_length):
 	return pkcs7_pad(s, block_length)

@@ -1,5 +1,5 @@
-from mcc_helpers import encryption_oracle
-from mcc_helpers import detect_cipher_mode
+from cryptopals import encryption_oracle
+from cryptopals import detect_cipher_mode
 
 def c11():
 

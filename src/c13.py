@@ -1,4 +1,4 @@
-from mcc_helpers import generate_aes_key, pkcs7_pad, pkcs7_strip, \
+from cryptopals import generate_aes_key, pkcs7_pad, pkcs7_strip, \
 						encrypt_aes_ecb, decrypt_aes_ecb
 
 def c13():

@@ -1,5 +1,5 @@
 from Crypto.Cipher import AES
-from mcc_helpers import b64_string_to_bytearray
+from cryptopals import b64_string_to_bytearray
 
 def c7(filename, key):
 
@@ -13,6 +13,6 @@ def c7(filename, key):
 	return plaintext
 
 if __name__ == "__main__":
-	filename = './7.txt'
+	filename = '../data/7.txt'
 	key = "YELLOW SUBMARINE"
 	print c7(filename, key)

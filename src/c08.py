@@ -1,4 +1,4 @@
-from mcc_helpers import hex_string_to_bytearray
+from cryptopals import hex_string_to_bytearray
 
 def c8(filename):
 
@@ -23,6 +23,6 @@ def c8(filename):
 	return (max_dups, ecb_ct_index, ecb_ct)
 
 if __name__ == "__main__":
-	(dups, index, ct) = c8('./8.txt')
+	(dups, index, ct) = c8('../data/8.txt')
 	print "Ciphertext with index {} has {} duplicate blocks" \
 		.format(index,dups)

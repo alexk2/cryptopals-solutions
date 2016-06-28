@@ -1,10 +1,10 @@
-from mcc_helpers import random_bytes, generate_aes_key, pkcs7_pad, \
+from cryptopals import random_bytes, generate_aes_key, pkcs7_pad, \
 						encrypt_aes_ecb, b64_string_to_bytearray
 from random import randint
 
 def c14():
 
-	filename = './12.txt'
+	filename = '../data/12.txt'
 
 	this_file = open(filename)
 	b64_string = ''.join([x.rstrip('\n') for x in this_file.readlines()])

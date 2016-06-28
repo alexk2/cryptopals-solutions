@@ -1,4 +1,4 @@
-from mcc_helpers import generate_aes_key, random_bytes, pkcs7_pad, \
+from cryptopals import generate_aes_key, random_bytes, pkcs7_pad, \
 						pkcs7_strip, encrypt_aes_cbc, decrypt_aes_cbc
 import urllib
 

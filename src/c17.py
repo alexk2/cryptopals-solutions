@@ -1,4 +1,4 @@
-from mcc_helpers import generate_aes_key, random_bytes, encrypt_aes_cbc, \
+from cryptopals import generate_aes_key, random_bytes, encrypt_aes_cbc, \
 						decrypt_aes_cbc, pkcs7_pad, pkcs7_strip
 import random
 
@@ -11,7 +11,7 @@ def c17():
 
 class CBCPaddingOracle:
 
-	B64_STRING_FILE = './17.txt'
+	B64_STRING_FILE = '../data/17.txt'
 	BLOCK_SIZE = 16
 
 	def __init__(self):

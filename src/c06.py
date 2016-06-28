@@ -1,7 +1,7 @@
-from mcc_helpers import b64_string_to_bytearray
-from mcc_helpers import hamming_distance
-from mcc_helpers import decrypt_sb_xor
-from mcc_helpers import encrypt_rk_xor
+from cryptopals import b64_string_to_bytearray
+from cryptopals import hamming_distance
+from cryptopals import decrypt_sb_xor
+from cryptopals import encrypt_rk_xor
 
 def c6(filename):
 
@@ -55,6 +55,6 @@ def find_probable_key_size(ciphertext, lower, upper):
 	return probable_key_size
 
 if __name__ == "__main__":
-	(key, plaintext) = c6('./6.txt')
+	(key, plaintext) = c6('../data/6.txt')
 	print "Key:\n" + key
 	print "\nPlaintext:\n" + plaintext

@@ -1,6 +1,6 @@
-from mcc_helpers import hex_string_to_bytearray
-from mcc_helpers import bytearray_to_hex_string
-from mcc_helpers import bytearray_xor
+from cryptopals import hex_string_to_bytearray
+from cryptopals import bytearray_to_hex_string
+from cryptopals import bytearray_xor
 
 def c2(s1, s2):
 	ba1 = hex_string_to_bytearray(s1)

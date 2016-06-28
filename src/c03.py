@@ -1,5 +1,5 @@
-from mcc_helpers import hex_string_to_bytearray
-from mcc_helpers import decrypt_sb_xor
+from cryptopals import hex_string_to_bytearray
+from cryptopals import decrypt_sb_xor
 
 def c3(hex_string):
 	ba = hex_string_to_bytearray(hex_string)

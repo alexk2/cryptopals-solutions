@@ -1,5 +1,5 @@
-from mcc_helpers import hex_string_to_bytearray
-from mcc_helpers import decrypt_sb_xor
+from cryptopals import hex_string_to_bytearray
+from cryptopals import decrypt_sb_xor
 
 def c4(filename):
 	this_file = open(filename)
@@ -12,4 +12,4 @@ def c4(filename):
 	return ba_dec.decode("utf-8")
 
 if __name__ == "__main__":
-	print c4('./4.txt')
+	print c4('../data/4.txt')
